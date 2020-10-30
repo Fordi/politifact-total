@@ -6,7 +6,6 @@ import {
 } from './util.js';
 
 onReady(() => setTimeout(() => {
-  debugger;
   qsa('.m-scorecard__total').forEach(a => a.parentNode.removeChild(a));
   const weights = [1, 0.75, 0.5, 0.25, 0, -0.5];
   const container = qs('.m-scorecard');
@@ -15,11 +14,12 @@ onReady(() => setTimeout(() => {
   const scores = cards.map(card =>
     parseInt(qs('.m-scorecard__checks', card).textContent.replace(/ checks/ig, ''))
   );
-  const totalChecks = scores.reduce((sum, score) => sum + score);
-  const truthiness = scores.reduce((sum, score, index) => (
-   sum + score * weights[index]
-  ), 0) / totalChecks;
-  const truthinessPct = (truthiness * 100).toFixed(0);
+  const totalChecks = scores.reduce((sum, score) => sum + score, 0);
+  console.log(scores, totalChecks);
+  const trueChecks = scores.reduce((sum, score, index) => (
+    sum + score * weights[index]
+  ), 0);
+  const truthinessPct = (trueChecks / totalChecks * 100).toFixed(0);
   const truth = qso({
     title: '.m-scorecard__title',
     bar: '.m-scorecard__bar',
@@ -29,7 +29,7 @@ onReady(() => setTimeout(() => {
   truth.title.innerHTML = 'Honesty';
   truth.bar.setAttribute('data-scorecard-bar', truthinessPct);
   truth.bar.style.height = `${truthinessPct}%`;
-  truth.checks.innerHTML = `${totalChecks} Checks`;
+  truth.checks.innerHTML = `${trueChecks} Truth<br />${totalChecks} Checks`;
   truth.value.innerHTML = truthinessPct;
   template.classList.add('.m-scorecard__total');
   template.removeAttribute('data-scorecard-item');
