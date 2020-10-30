@@ -15,6 +15,12 @@ onReady(() => setTimeout(() => {
     parseInt(qs('.m-scorecard__checks', card).textContent.replace(/ checks/ig, ''))
   );
   const totalChecks = scores.reduce((sum, score) => sum + score, 0);
+  cards.forEach((card, i) => {
+    const value = qs('.m-scorecard__value>span', card);
+    const bar = qs('.m-scorecard__bar', card);
+    const pct = 100 * scores[i] / totalChecks;
+    value.parentNode.setAttribute('title', `${pct.toFixed(3)}%`);
+  });
   console.log(scores, totalChecks);
   const trueChecks = scores.reduce((sum, score, index) => (
     sum + score * weights[index]
