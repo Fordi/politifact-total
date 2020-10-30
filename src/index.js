@@ -21,7 +21,6 @@ onReady(() => setTimeout(() => {
     const pct = 100 * scores[i] / totalChecks;
     value.parentNode.setAttribute('title', `${pct.toFixed(3)}%`);
   });
-  console.log(scores, totalChecks);
   const trueChecks = scores.reduce((sum, score, index) => (
     sum + score * weights[index]
   ), 0);
