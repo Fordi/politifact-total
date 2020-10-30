@@ -19,7 +19,7 @@ onReady(() => setTimeout(() => {
   const trueChecks = scores.reduce((sum, score, index) => (
     sum + score * weights[index]
   ), 0);
-  const truthinessPct = (trueChecks / totalChecks * 100).toFixed(0);
+  const truthinessPct = (100 * trueChecks / totalChecks).toFixed(0);
   const truth = qso({
     title: '.m-scorecard__title',
     bar: '.m-scorecard__bar',
@@ -31,6 +31,7 @@ onReady(() => setTimeout(() => {
   truth.bar.style.height = `${truthinessPct}%`;
   truth.checks.innerHTML = `${trueChecks} Truth<br />${totalChecks} Checks`;
   truth.value.innerHTML = truthinessPct;
+  truth.value.parentNode.setAttribute('title', `${(100 * trueChecks / totalChecks).toFixed(3)}%`);
   template.classList.add('.m-scorecard__total');
   template.removeAttribute('data-scorecard-item');
   container.appendChild(template);
