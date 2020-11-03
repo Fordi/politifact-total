@@ -19,4 +19,4 @@ Honesty = ----------------------------------------------------------------------
 * in Chrome/Chromium, go to `chrome://extensions`
 * flip on "Developer mode" in the upper right-hand corner
 * click "Load unpacked"
-* Browse to this folder.
+* Browse to this repository's `src` folder.
