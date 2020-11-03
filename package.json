@@ -1,6 +1,10 @@
 {
   "name": "politifact-total",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "author": {
+    "name": "Bryan Elliott",
+    "email": "ext@codemonkeybryan.com"
+  },
   "scripts": {
     "build": "node ./build.js"
   },
