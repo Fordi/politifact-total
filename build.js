@@ -49,7 +49,7 @@ const compress = async (root, target) => {
   manifest.version = pkg.version;
   manifest.web_accessible_resources = (await lsr('./src')).filter((a) => (
     a !== 'src/manifest.json' && a !== 'src/extension.js'
-  ));
+  )).map((a) => a.replace(/^src\//, ''));
   console.log(`Web-accessible:\n\t${manifest.web_accessible_resources.join('\n\t')}`);
   await writeFile('./src/manifest.json', `${JSON.stringify(manifest, null, 2)}\n`);
   console.log('Updated manifest.json');
